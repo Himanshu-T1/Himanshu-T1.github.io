@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Himanshu Tiwari — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0E27;
+    --burgundy: #3D0F26;
+    --gold: #C9A227;
+    --gold-soft: #E8D9A0;
+    --ivory: #F3ECDC;
+    --ivory-dim: #C9C3B4;
+    --emerald: #12382C;
+    --rule: rgba(201,162,39,0.35);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3, .display{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Emblem ---------- */
+  .emblem{
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .emblem span{
+    transform: rotate(-45deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(11,14,39,0.85);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+  .nav-name{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--ivory);
+  }
+  .nav-links{
+    display: flex;
+    gap: 36px;
+    font-size: 0.92rem;
+    color: var(--ivory-dim);
+  }
+  .nav-links a{
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.25s ease;
+  }
+  .nav-links a:hover{ color: var(--gold-soft); }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:0;
+    width:0; height:1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-top: 76px;
+  }
+
+  .hero-grid{
+    display: grid;
+    grid-template-columns: 1.25fr 0.85fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .portrait-frame{
+    position: relative;
+    justify-self: center;
+    width: 100%;
+    max-width: 340px;
+  }
+  .portrait-frame::before{
+    content:'';
+    position: absolute;
+    top: -16px; left: -16px; right: 16px; bottom: 16px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+  .portrait-frame img{
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.03);
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .portrait-frame{ order: -1; max-width: 260px; margin-top: 20px; }
+  }
+
+  header.hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 15%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(61,15,38,0.55), transparent 65%);
+    pointer-events:none;
+  }
+
+  .hero-inner{
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise 0.9s ease forwards 0.15s;
+  }
+
+  @keyframes rise{
+    to{ opacity:1; transform:none; }
+  }
+
+  .kicker{
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 22px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .kicker .line{
+    width: 40px; height:1px; background: var(--gold);
+  }
+
+  h1.name{
+    font-size: clamp(3rem, 9vw, 6.2rem);
+    line-height: 0.98;
+    color: var(--ivory);
+  }
+  h1.name em{
+    font-style: italic;
+    color: var(--gold-soft);
+  }
+
+  .role{
+    margin-top: 26px;
+    max-width: 520px;
+    font-size: 1.08rem;
+    color: var(--ivory-dim);
+  }
+
+  .hero-cta{
+    margin-top: 44px;
+    display:flex;
+    gap: 28px;
+    align-items:center;
+    flex-wrap: wrap;
+  }
+  .btn-primary{
+    border: 1px solid var(--gold);
+    color: var(--gold-soft);
+    padding: 13px 30px;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover{
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .text-link{
+    font-size: 0.9rem;
+    color: var(--ivory-dim);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .text-link:hover{ color: var(--gold-soft); border-color: var(--gold); }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding: 130px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .section-num{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+  .section-head h2{
+    font-size: 2.4rem;
+    color: var(--ivory);
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 70px;
+  }
+  .about-grid p{
+    font-size: 1.08rem;
+    color: var(--ivory-dim);
+    max-width: 60ch;
+  }
+  .about-grid p + p{ margin-top: 18px; }
+
+  .fact-list{
+    border-left: 1px solid var(--rule);
+    padding-left: 28px;
+  }
+  .fact{
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .fact:last-child{ border-bottom:none; }
+  .fact-label{
+    font-size: 0.78rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .fact-value{
+    font-size: 1.02rem;
+    color: var(--ivory);
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .skill-item{
+    flex: 1 1 220px;
+    padding: 30px 26px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.3s ease;
+  }
+  .skill-item:hover{ background: rgba(201,162,39,0.05); }
+  .skill-mark{
+    width: 8px; height: 8px;
+    background: var(--gold);
+    display:inline-block;
+    margin-bottom: 16px;
+  }
+  .skill-item h3{
+    font-size: 1.5rem;
+    color: var(--ivory);
+    margin-bottom: 8px;
+  }
+  .skill-item p{
+    font-size: 0.92rem;
+    color: var(--ivory-dim);
+  }
+
+  /* ---------- Projects ---------- */
+  .project{
+    display: grid;
+    grid-template-columns: 0.9fr 1.6fr;
+    gap: 50px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .project:first-of-type{ border-top: 1px solid var(--rule); }
+  .project-index{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--burgundy);
+    -webkit-text-stroke: 1px var(--gold);
+    color: transparent;
+  }
+  .project-body h3{
+    font-size: 1.9rem;
+    color: var(--ivory);
+    margin-bottom: 12px;
+  }
+  .project-body p{
+    color: var(--ivory-dim);
+    max-width: 58ch;
+    margin-bottom: 18px;
+  }
+  .tag-row{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tag{
+    font-size: 0.78rem;
+    color: var(--gold-soft);
+    border: 1px solid var(--rule);
+    padding: 5px 14px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-block{
+    text-align: center;
+    padding: 150px 0 130px;
+  }
+  .contact-block .section-num{ display:block; margin-bottom: 18px; }
+  .contact-block h2{
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    max-width: 720px;
+    margin: 0 auto 40px;
+    color: var(--ivory);
+  }
+  .contact-links{
+    display:flex;
+    justify-content:center;
+    gap: 44px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .contact-links a{
+    font-size: 1rem;
+    color: var(--ivory-dim);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .contact-links a:hover{ color: var(--gold-soft); border-color: var(--gold); }
+
+  footer{
+    text-align:center;
+    padding: 36px 0;
+    font-size: 0.8rem;
+    color: var(--ivory-dim);
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px){
+    .nav-links{ display:none; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .project{ grid-template-columns: 1fr; gap: 16px; }
+    .project-index{ font-size: 2rem; }
+    section{ padding: 90px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-inner{ animation: none; opacity:1; transform:none; }
+    html{ scroll-behavior: auto; }
+  }
+
+  :focus-visible{
+    outline: 1px solid var(--gold);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-name">Himanshu Tiwari</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner hero-grid">
+    <div>
+      <div class="kicker"><span class="line"></span> BCA Student · Allenhouse Group of Institutes</div>
+      <h1 class="name">Himanshu<br><em>Tiwari</em></h1>
+      <p class="role">First-year Computer Applications student building a foundation in programming and database systems — currently exploring how software connects to the data behind it.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn-primary">View my work</a>
+        <a href="mailto:tiiwariankur@gmail.com" class="text-link">Say hello</a>
+      </div>
+    </div>
+    <div class="portrait-frame">
+      <img src="about_photo.jpg" alt="Himanshu Tiwari">
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">I.</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm in my first year of a Bachelor of Computer Applications at Allenhouse Group of Institutes, where I've been getting hands-on with core programming languages and the fundamentals of how software is structured.</p>
+        <p>My interest leans toward systems that manage real information — which is what led me to build a Hospital Management System as one of my early projects, combining application logic with a working database behind it.</p>
+      </div>
+      <div class="fact-list">
+        <div class="fact">
+          <div class="fact-label">Program</div>
+          <div class="fact-value">BCA, 1st Year</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Institute</div>
+          <div class="fact-value">Allenhouse Group of Institutes</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Started</div>
+          <div class="fact-value">2026</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Based in</div>
+          <div class="fact-value">India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">II.</span>
+      <h2>Skills</h2>
+    </div>
+  </div>
+  <div class="skills-row">
+    <div class="skill-item">
+      <span class="skill-mark"></span>
+      <h3>C</h3>
+      <p>Procedural programming fundamentals and problem solving.</p>
+    </div>
+    <div class="skill-item">
+      <span class="skill-mark"></span>
+      <h3>C++</h3>
+      <p>Object-oriented concepts building on core C foundations.</p>
+    </div>
+    <div class="skill-item">
+      <span class="skill-mark"></span>
+      <h3>DBMS</h3>
+      <p>Relational database design and query fundamentals.</p>
+    </div>
+    <div class="skill-item">
+      <span class="skill-mark"></span>
+      <h3>HTML</h3>
+      <p>Structuring and building content for the web.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">III.</span>
+      <h2>Selected Work</h2>
+    </div>
+
+    <div class="project">
+      <div class="project-index">01</div>
+      <div class="project-body">
+        <h3>Hospital Management System</h3>
+        <p>A desktop application built in Python with direct database connectivity, designed to manage patient records, appointments, and hospital data through a structured, queryable backend.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">DBMS</span>
+          <span class="tag">System Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-index">02</div>
+      <div class="project-body">
+        <h3>This Portfolio</h3>
+        <p>A single-page site built to bring my resume online — designed with a deliberate, editorial aesthetic and deployed as a static site through GitHub Pages.</p>
+        <div class="tag-row">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom: 1px solid var(--rule);">
+  <div class="wrap contact-block">
+    <span class="section-num">IV.</span>
+    <h2>Let's talk about what you're building.</h2>
+    <div class="contact-links">
+      <a href="mailto:tiiwariankur@gmail.com">tiiwariankur@gmail.com</a>
+      <a href="https://github.com/Himanshu-T1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/himanshutiwari11762" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Himanshu Tiwari — built and maintained on GitHub Pages</div>
+</footer>
+
+</body>
+</html>
